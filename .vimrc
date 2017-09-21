@@ -176,5 +176,6 @@ endif
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets'
 
-" NERDtree mapping
+" NERDtree 
+let NERDTreeShowHidden = 1
 map <C-o> :NERDTreeToggle<CR>
