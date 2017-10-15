@@ -179,3 +179,26 @@ let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/neosnip
 " NERDtree 
 let NERDTreeShowHidden = 1
 map <C-o> :NERDTreeToggle<CR>
+
+
+" Light line settings
+let g:lightline = {
+    \ 'active': {
+    \   'left': [ ['mode','paste'],
+    \             ['gitinfo','readonly','filename','modified']]
+    \ },
+    \ 'component_function': {
+    \   'gitinfo': 'Fugitives'
+    \ }
+    \}
+
+function! Fugitives()
+  try
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      let _ = fugitive#head()
+      return strlen(_) ? '⭠ '._: ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
