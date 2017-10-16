@@ -32,9 +32,12 @@ call dein#add('airblade/vim-gitgutter')
 " file tree
 call dein#add('scrooloose/nerdtree')
 
+" golang
+call dein#add('fatih/vim-go')
 
 " color scheme
 call dein#add('tomasr/molokai')
+call dein#add('altercation/solarized')
 " left-below mode preview
 call dein#add('itchyny/lightline.vim')
 
@@ -196,9 +199,17 @@ function! Fugitives()
   try
     if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
       let _ = fugitive#head()
-      return strlen(_) ? '⭠ '._: ''
+      return strlen(_) ? 'git::'._: ''
     endif
   catch
   endtry
   return ''
 endfunction
+
+" go-vim hilight
+let g:go_hightlight_functions = 1
+let g:go_hightlight_methods = 1
+let g:go_hightlight_structs = 1
+let g:go_hightlight_interfaces = 1
+let g:go_hightlight_operators = 1
+let g:go_hightlight_build_constraints = 1
