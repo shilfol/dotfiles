@@ -61,6 +61,9 @@ set ambiwidth=double
 set wildmenu
 
 set autoread
+set autoindent
+
+set iminsert=0
 
 set fenc=utf-8
 
