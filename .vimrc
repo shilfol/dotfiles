@@ -41,6 +41,9 @@ call dein#add('altercation/solarized')
 " left-below mode preview
 call dein#add('itchyny/lightline.vim')
 
+"auto closed"
+call dein#add('cohama/lexima.vim')
+
 call dein#end()
 
 if dein#check_install()
