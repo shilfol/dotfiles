@@ -54,6 +54,9 @@ filetype plugin indent on
 
 colorscheme molokai
 
+" insert中の jj に Escを割り当てる
+inoremap <silent> jj <ESC>
+
 " enable moving right at visual
 set virtualedit=block
 " enable backspace in insert mode
@@ -148,7 +151,7 @@ set wrap
 
 " Neocomplete settings
 
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#enable_underbar_completion = 1
 let g:neocomplete#enable_camel_case_completion = 1
@@ -183,7 +186,7 @@ if has('conceal')
 endif
 
 let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory='~/.vim/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets'
+let g:neosnippet#snippets_directory = '~/.vim/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets'
 
 " NERDtree 
 let NERDTreeShowHidden = 1
@@ -205,7 +208,7 @@ function! Fugitives()
   try
     if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
       let _ = fugitive#head()
-      return strlen(_) ? 'git::'._: ''
+      return strlen(_) ? 'git::'._ : ''
     endif
   catch
   endtry
@@ -219,3 +222,26 @@ let g:go_hightlight_structs = 1
 let g:go_hightlight_interfaces = 1
 let g:go_hightlight_operators = 1
 let g:go_hightlight_build_constraints = 1
+
+" Unite settings
+
+" unite開始時にinsertモードにする
+let g:unite_enable_start_insert = 1
+" ファイル履歴の保存数
+let g:unite_source_file_mru_limit = 50
+
+
+call unite#custom#source("file", "matchers", "matcher_default")
+
+" uniteの起動
+noremap <C-p> :Unite buffer<CR>
+noremap <C-n> :Unite -buffer-name=file file<CR>
+
+" uniteの終了(起動時と同じコマンドで戻る)
+au FileType unite nnoremap <silent> <buffer> <C-n> :q<CR>
+au FileType unite inoremap <silent> <buffer> <C-n> <ESC>:q<CR>
+au FileType unite nnoremap <silent> <buffer> <C-p> :q<CR>
+au FileType unite inoremap <silent> <buffer> <C-p> <ESC>:q<CR>
+" esc2回でも戻る
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
