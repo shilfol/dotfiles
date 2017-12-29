@@ -11,40 +11,20 @@ endif
 
 execute 'set runtimepath^=' . s:dein_repo_dir
 
-call dein#begin(s:dein_dir)
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/neocomplete')
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
-" Unite.vim
-call dein#add('Shougo/unite.vim')
-call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-call dein#add('Shougo/neomru.vim')
+  call dein#load_toml(s:toml, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-" neosnippets
-call dein#add('Shougo/neosnippet')
-call dein#add('Shougo/neosnippet-snippets')
+  call dein#end()
+  call dein#save_state()
 
-" git tools
-call dein#add('tpope/vim-fugitive')
-call dein#add('airblade/vim-gitgutter')
-
-" file tree
-call dein#add('scrooloose/nerdtree')
-
-" golang
-call dein#add('fatih/vim-go')
-
-" color scheme
-call dein#add('tomasr/molokai')
-call dein#add('altercation/solarized')
-" left-below mode preview
-call dein#add('itchyny/lightline.vim')
-
-"auto closed"
-call dein#add('cohama/lexima.vim')
-
-call dein#end()
+endif
 
 if dein#check_install()
   call dein#install()
@@ -149,49 +129,6 @@ set showmode
 
 set wrap
 
-" Neocomplete settings
-
-let g:neocomplete#enable_at_startup = 0
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_underbar_completion = 1
-let g:neocomplete#enable_camel_case_completion = 1
-let g:neocomplete#max_list = 10
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" set start length
-let g:neocomplete#auto_completion_start_length = 2
-let g:neocomplete#enable_auto_close_preview = 0
-
-let g:neocomplete#max_keyword_width = 10000
-
-
-
-
-" Neosnippet settings
-
-imap <C-k>  <Plug>(neosnippet_expand_or_jump)
-smap <C-k>  <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>  <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \   "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#snippets_directory = '~/.vim/dein/repos/github.com/Shougo/neosnippet-snippets/neosnippets'
-
-" NERDtree 
-let NERDTreeShowHidden = 1
-map <C-o> :NERDTreeToggle<CR>
-
 
 " Light line settings
 let g:lightline = {
@@ -215,33 +152,3 @@ function! Fugitives()
   return ''
 endfunction
 
-" go-vim hilight
-let g:go_hightlight_functions = 1
-let g:go_hightlight_methods = 1
-let g:go_hightlight_structs = 1
-let g:go_hightlight_interfaces = 1
-let g:go_hightlight_operators = 1
-let g:go_hightlight_build_constraints = 1
-
-" Unite settings
-
-" unite開始時にinsertモードにする
-let g:unite_enable_start_insert = 1
-" ファイル履歴の保存数
-let g:unite_source_file_mru_limit = 50
-
-
-call unite#custom#source("file", "matchers", "matcher_default")
-
-" uniteの起動
-noremap <C-p> :Unite buffer<CR>
-noremap <C-n> :Unite -buffer-name=file file<CR>
-
-" uniteの終了(起動時と同じコマンドで戻る)
-au FileType unite nnoremap <silent> <buffer> <C-n> :q<CR>
-au FileType unite inoremap <silent> <buffer> <C-n> <ESC>:q<CR>
-au FileType unite nnoremap <silent> <buffer> <C-p> :q<CR>
-au FileType unite inoremap <silent> <buffer> <C-p> <ESC>:q<CR>
-" esc2回でも戻る
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
