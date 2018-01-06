@@ -1,5 +1,9 @@
 #!/bin/sh
 
+DSTDIR=~/.vim/rc
+
+[ ! -e $DSTDIR ] && mkdir -p $DSTDIR
+
 DIR=$(cd $(dirname $0); pwd)
 
 ln -s $DIR/.vim/dein.toml ~/.vim/rc/dein.toml 
