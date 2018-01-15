@@ -115,7 +115,8 @@ set clipboard=unnamed,autoselect
 nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 
 " ctags settings
-nnoremap <C-]> g<C-]>
+nnoremap tt g<C-]>
+nnoremap tr <C-T>
 
 syntax on
 
