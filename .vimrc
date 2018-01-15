@@ -114,6 +114,9 @@ set clipboard=unnamed,autoselect
 
 nnoremap <Esc><Esc> :nohlsearch<CR><ESC>
 
+" ctags settings
+nnoremap <C-]> g<C-]>
+
 syntax on
 
 set nrformats=
