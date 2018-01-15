@@ -36,7 +36,10 @@ colorscheme molokai
 
 " insert中の jj に Escを割り当てる
 inoremap <silent> jj <ESC>
-
+" insert中に ctrl-l で右に移動(括弧自動補完に対応)
+inoremap <C-l> <RIGHT>
+" LeaderキーをSpaceに割り当てる
+let mapleader = "\<Space>"
 " enable moving right at visual
 set virtualedit=block
 " enable backspace in insert mode
