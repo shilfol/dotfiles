@@ -34,3 +34,30 @@ hook_source = '''
   let g:vimtex_view_general_viewer = 'zathura'
   let g:vimtex_view_general_options = '-r @line @pdf @tex'
 '''
+#smarty template
+[[plugins]]
+repo = 'vim-scripts/smarty-syntax'
+on_ft = ['smarty']
+
+#html
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html','smarty']
+hook_source ='''
+  let g:user_emmet_mode = 'a'
+  let g:user_emmet_settings = {
+    \'variables' : {
+    \  'lang' : 'ja'
+    \},
+  \}
+'''
+
+[[plugins]]
+repo = 'vim-scripts/closetag.vim'
+on_ft = ['html','smarty']
+
+#markdown preview
+#type :MarkdownPreview
+[[plugins]]
+repo = 'iamcco/markdown-preview.vim'
+on_ft = ['markdown']
