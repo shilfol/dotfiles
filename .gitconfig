@@ -1,0 +1,11 @@
+[alias]
+  br = branch
+  co = checkout
+  st = status
+	graph = log --oneline --decorate --graph
+[merge]
+	ff = false
+[pull]
+	ff = only
+[core]
+	editor = vim
