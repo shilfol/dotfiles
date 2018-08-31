@@ -63,3 +63,21 @@ on_ft = ['html','smarty']
 [[plugins]]
 repo = 'iamcco/markdown-preview.vim'
 on_ft = ['markdown']
+
+#autolinter
+[[plugins]]
+repo = 'w0rp/ale'
+on_ft = ['ruby','javascript']
+hook_source ='''
+  let g:ale_linters = {
+  \  'javascript': ['eslint','prettier'],
+  \  'ruby': ['rubocop'],
+  \}
+  let g:ale_fixers = {
+  \  'javascript' : ['prettier'],
+  \}
+  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_text_changed = 0
+  let g:ale_lint_on_enter = 0
+  let g:ale_fix_on_save = 1
+'''
