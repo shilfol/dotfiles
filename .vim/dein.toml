@@ -92,7 +92,7 @@ repo = 'scrooloose/nerdtree'
 hook_add = '''
   let NERDTreeShowHidden = 1
 
-  map <C-o> :NERDTreeToggle<CR>
+  map <C-l> :NERDTreeToggle<CR>
 '''
 
 # color scheme
