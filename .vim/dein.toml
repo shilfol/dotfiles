@@ -20,18 +20,28 @@ hook_add = '''
 # Unite.vim
 [[plugins]]
 repo = 'Shougo/unite.vim'
-  # unite開始時にinsertモードにする
+  # unite開始時にnormalモードにする
+  # 大文字小文字の区別を無くす
   # ファイル履歴の保存数
-  # uniteの起動
+  # unite: バッファと直近ファイル履歴
+  # unite: ファイル一覧と新規作成
+  # unite: grep周り
   # uniteの終了(起動時と同じコマンドで戻る)
   # esc2回でも戻る
 hook_add = '''
   let g:unite_enable_start_insert = 0
 
+  let g:unite_enable_ignore_case = 1
+  let g:unite_enable_smart_case = 1
+
   let g:unite_source_file_mru_limit = 50
 
-  noremap <C-p> :Unite -start-insert buffer neomru/file<CR>
-  noremap <C-n> :Unite -start-insert file_rec/async file/new directory/new<CR>
+  nnoremap <C-p> :Unite -start-insert buffer neomru/file<CR>
+  nnoremap <C-n> :Unite -start-insert file_rec/async file/new<CR>
+
+  nnoremap <silent> <Space>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR> 
+  nnoremap <silent> <Space>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR> 
+  nnoremap <silent> <Space>r :<C-u>UniteResume search-buffer<CR> 
 
   au FileType unite nnoremap <silent> <buffer> <C-n> :q<CR>
   au FileType unite inoremap <silent> <buffer> <C-n> <ESC>:q<CR>
