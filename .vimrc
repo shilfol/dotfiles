@@ -136,6 +136,9 @@ set showmode
 
 set wrap
 
+" terminal mode mapping
+tnoremap <silent> jj <C-w><S-n>
+tnoremap <silent> <Esc> <C-w><S-n>
 
 " Light line settings
 let g:lightline = {
