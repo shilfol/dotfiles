@@ -1,0 +1,12 @@
+- name: Build Environment
+  hosts: 127.0.0.1
+  connection: local
+
+  vars:
+    home_path: '{{ lookup("env", "HOME") }}'
+    project_path: '{{ ansible_env.PWD }}'
+
+  roles:
+    - role: link
+      tags: ['basic', 'link']
+
