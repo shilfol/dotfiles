@@ -1,0 +1,5 @@
+- debug: var=item.key 
+  with_items: '{{ link.items() }}'
+
+- debug: var=item.value
+  with_items: '{{ link }}'

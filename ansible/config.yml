@@ -1,0 +1,8 @@
+  link: 
+    ctags: .ctags
+    vimrc: .vimrc
+    vim/dein: .vim/dein.toml
+    vim/dein_lazy: .vim/dein_lazy.toml
+    gitconfig: .gitconfig
+    latexmkrc: .latexmkrc
+
