@@ -55,6 +55,7 @@ set autoindent
 set iminsert=0
 
 set fenc=utf-8
+set encoding=utf-8
 
 " search
 set ignorecase

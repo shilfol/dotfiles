@@ -1,20 +1,24 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# deoplete
 [[plugins]]
-repo = 'Shougo/neocomplete'
-hook_add = '''
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#enable_underbar_completion = 1
-  let g:neocomplete#enable_camel_case_completion = 1
-  let g:neocomplete#max_list = 10
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
+repo = 'roxma/vim-hug-neovim-rpc'
 
-  let g:neocomplete#auto_completion_start_length = 2
-  let g:neocomplete#enable_auto_close_preview = 0
+[[plugins]]
+repo = 'roxma/nvim-yarp'
 
-  let g:neocomplete#max_keyword_width = 10000
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+hook_add = 'let g:deoplete#enable_at_startup = 1'
+hook_post_source = '''
+  call deoplete#custom#option({
+  \ 'auto_complete_delay': 0,
+  \ 'camel_case': v:true,
+  \ 'max_list': 20,
+  \ 'num_processes': 4,
+  \ })
 '''
 
 # Unite.vim
