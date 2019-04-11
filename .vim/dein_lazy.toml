@@ -62,6 +62,11 @@ hook_post_source = '''
   \ 'cursor_wrap': v:true,
   \ 'direction': 'top',
   \ })
+  call denite#custom#map('insert', 'jj', '<denite:enter_mode:normal>', 'noremap')
+  call denite#custom#map('insert', '<C-p>', '<denite:quit>', 'noremap')
+  call denite#custom#map('insert', '<C-n>', '<denite:quit>', 'noremap')
+  call denite#custom#map('normal', '<C-p>', '<denite:quit>', 'noremap')
+  call denite#custom#map('normal', '<C-n>', '<denite:quit>', 'noremap')
 '''
 
 # tex
