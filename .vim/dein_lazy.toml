@@ -16,6 +16,54 @@ hook_source = '''
   let g:go_metalinter_autosave = 1
 '''
 
+# deoplete
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+on_event = 'VimEnter'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
+on_event = 'InsertEnter'
+hook_add = '''
+  let g:deoplete#enable_at_startup = 1
+  inoremap <expr><tab> pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \   "\<Plug>(neosnippet_expand_or_jump)" : "\<tab>"
+'''
+hook_post_source = '''
+  call deoplete#custom#option({
+  \ 'auto_complete_delay': 0,
+  \ 'camel_case': v:true,
+  \ 'max_list': 20,
+  \ 'num_processes': 4,
+  \ })
+'''
+
+# denite.nvim
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+depends = ['neomru.vim']
+on_event = 'VimEnter'
+hook_add = '''
+  nnoremap <C-p> :<C-u>Denite buffer file_mru -mode=insert<CR>
+  nnoremap <C-n> :<C-u>Denite file/rec -mode=insert<CR>
+
+  nnoremap <silent> <Space>g :<C-u>Denite -mode=normal grep -smartcase -auto-action=preview -vertical-preview<CR> 
+  nnoremap <silent> <Space>cg :<C-u>DeniteCursorWord -mode=normal grep -auto-action=preview -vertical-preview<CR> 
+'''
+hook_post_source = '''
+  call denite#custom#option('default', {
+  \ 'prompt': '>',
+  \ 'cursor_wrap': v:true,
+  \ 'direction': 'top',
+  \ })
+'''
+
 # tex
 [[plugins]]
 repo = 'lervag/vimtex'

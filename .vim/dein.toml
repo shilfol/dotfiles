@@ -1,64 +1,6 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
-# deoplete
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-
-[[plugins]]
-repo = 'roxma/nvim-yarp'
-
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-depends = ['nvim-yarp', 'vim-hug-neovim-rpc']
-hook_add = 'let g:deoplete#enable_at_startup = 1'
-hook_post_source = '''
-  call deoplete#custom#option({
-  \ 'auto_complete_delay': 0,
-  \ 'camel_case': v:true,
-  \ 'max_list': 20,
-  \ 'num_processes': 4,
-  \ })
-'''
-
-# Unite.vim
-[[plugins]]
-repo = 'Shougo/unite.vim'
-  # unite開始時にnormalモードにする
-  # 大文字小文字の区別を無くす
-  # ファイル履歴の保存数
-  # unite: バッファと直近ファイル履歴
-  # unite: ファイル一覧と新規作成
-  # unite: grep周り
-  # uniteの終了(起動時と同じコマンドで戻る)
-  # esc2回でも戻る
-hook_add = '''
-  let g:unite_enable_start_insert = 0
-
-  let g:unite_enable_ignore_case = 1
-  let g:unite_enable_smart_case = 1
-
-  let g:unite_source_file_mru_limit = 50
-
-  nnoremap <C-p> :Unite -start-insert buffer neomru/file<CR>
-  nnoremap <C-n> :Unite -start-insert file_rec/async file/new<CR>
-
-  nnoremap <silent> <Space>g :<C-u>Unite grep:. -buffer-name=search-buffer<CR> 
-  nnoremap <silent> <Space>cg :<C-u>Unite grep:. -buffer-name=search-buffer<CR><C-R><C-W><CR> 
-  nnoremap <silent> <Space>r :<C-u>UniteResume search-buffer<CR> 
-
-  au FileType unite nnoremap <silent> <buffer> <C-n> :q<CR>
-  au FileType unite inoremap <silent> <buffer> <C-n> <ESC>:q<CR>
-  au FileType unite nnoremap <silent> <buffer> <C-p> :q<CR>
-  au FileType unite inoremap <silent> <buffer> <C-p> <ESC>:q<CR>
-
-  au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-  au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
-'''
-hook_post_source = '''
-  call unite#custom#source("file", "matchers", "matcher_default")
-'''
-
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
